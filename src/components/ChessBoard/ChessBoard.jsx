@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { Chessboard } from 'react-chessboard';
-import useChessGame from '../../hooks/useChessGame';
+import { Chess } from 'chess.js';
 import './ChessBoard.css';
 
 export default function ChessBoard({
@@ -11,152 +11,195 @@ export default function ChessBoard({
     onGameEnd,
     customStyles = {}
 }) {
-    const {
-        position,
-        moveHistory,
-        isGameOver,
-        result,
-        makeMove,
-        getLegalMoves,
-        undoMove,
-        resetGame,
-        getGameState
-    } = useChessGame(initialPosition);
-
-    const [selectedSquare, setSelectedSquare] = useState(null);
-    const [legalMoves, setLegalMoves] = useState([]);
-    const [moveFrom, setMoveFrom] = useState('');
-    const [moveTo, setMoveTo] = useState(null);
+    const [game, setGame] = useState(() => new Chess(initialPosition === 'start' ? undefined : initialPosition));
+    const [moveHistory, setMoveHistory] = useState([]);
     const [optionSquares, setOptionSquares] = useState({});
+    const [moveFrom, setMoveFrom] = useState(null);
 
-    /**
-     * Handle piece drop on board
-     */
-    function onDrop(sourceSquare, targetSquare) {
-        if (!interactive) return false;
-
-        const move = makeMove({
-            from: sourceSquare,
-            to: targetSquare,
-            promotion: 'q' // Always promote to queen for now
+    // Make a move and update state
+    function safeGameMutate(modify) {
+        setGame((g) => {
+            const update = new Chess(g.fen());
+            modify(update);
+            return update;
         });
-
-        // If move was successful
-        if (move) {
-            setSelectedSquare(null);
-            setLegalMoves([]);
-            setOptionSquares({});
-
-            // Check if game ended
-            if (isGameOver && onGameEnd) {
-                const gameState = getGameState();
-                onGameEnd(gameState);
-            }
-
-            return true;
-        }
-
-        return false;
     }
 
-    /**
-     * Handle square click for move selection
-     */
+    // Get possible moves for a square
+    function getMoveOptions(square) {
+        const moves = game.moves({
+            square,
+            verbose: true,
+        });
+        if (moves.length === 0) {
+            setOptionSquares({});
+            return false;
+        }
+
+        const newSquares = {};
+        moves.forEach((move) => {
+            newSquares[move.to] = {
+                background:
+                    game.get(move.to) && game.get(move.to).color !== game.get(square).color
+                        ? 'radial-gradient(circle, rgba(255,0,0,0.4) 85%, transparent 85%)'
+                        : 'radial-gradient(circle, rgba(139, 92, 246, 0.4) 25%, transparent 25%)',
+                borderRadius: '50%',
+            };
+        });
+        newSquares[square] = {
+            background: 'rgba(255, 255, 0, 0.4)',
+        };
+        setOptionSquares(newSquares);
+        return true;
+    }
+
+    // Handle piece drop (drag and drop)
+    function onDrop(sourceSquare, targetSquare, piece) {
+        if (!interactive) return false;
+
+        const gameCopy = new Chess(game.fen());
+        const move = gameCopy.move({
+            from: sourceSquare,
+            to: targetSquare,
+            promotion: piece[1]?.toLowerCase() ?? 'q',
+        });
+
+        // Illegal move
+        if (move === null) return false;
+
+        setGame(gameCopy);
+        setMoveHistory(gameCopy.history({ verbose: true }));
+        setOptionSquares({});
+        setMoveFrom(null);
+
+        // Check for game over
+        if (gameCopy.isGameOver() && onGameEnd) {
+            let result = 'Game Over';
+            if (gameCopy.isCheckmate()) {
+                result = `Checkmate! ${gameCopy.turn() === 'w' ? 'Black' : 'White'} wins!`;
+            } else if (gameCopy.isDraw()) {
+                result = 'Draw!';
+            } else if (gameCopy.isStalemate()) {
+                result = 'Stalemate!';
+            }
+
+            onGameEnd({
+                pgn: gameCopy.pgn(),
+                fen: gameCopy.fen(),
+                result: result,
+                history: gameCopy.history({ verbose: true })
+            });
+        }
+
+        return true;
+    }
+
+    // Handle square click (click to move)
     function onSquareClick(square) {
         if (!interactive) return;
 
-        // If no square selected, select this square
-        if (!selectedSquare) {
-            const moves = getLegalMoves(square);
-            if (moves.length > 0) {
-                setSelectedSquare(square);
-                setLegalMoves(moves);
-
-                // Highlight legal move squares
-                const squares = {};
-                moves.forEach(move => {
-                    squares[move] = {
-                        background: 'radial-gradient(circle, rgba(139, 92, 246, 0.5) 25%, transparent 25%)',
-                        borderRadius: '50%'
-                    };
-                });
-                setOptionSquares(squares);
-            }
+        // If clicking on the same square, deselect
+        if (moveFrom === square) {
+            setMoveFrom(null);
+            setOptionSquares({});
+            return;
         }
-        // If square already selected
-        else {
-            // Try to make move to clicked square
-            const move = makeMove({
-                from: selectedSquare,
+
+        // If a piece is already selected
+        if (moveFrom) {
+            const gameCopy = new Chess(game.fen());
+            const move = gameCopy.move({
+                from: moveFrom,
                 to: square,
-                promotion: 'q'
+                promotion: 'q',
             });
 
+            // Valid move
             if (move) {
-                setSelectedSquare(null);
-                setLegalMoves([]);
+                setGame(gameCopy);
+                setMoveHistory(gameCopy.history({ verbose: true }));
+                setMoveFrom(null);
                 setOptionSquares({});
 
-                if (isGameOver && onGameEnd) {
-                    const gameState = getGameState();
-                    onGameEnd(gameState);
-                }
-            } else {
-                // Check if clicking on own piece to select it
-                const moves = getLegalMoves(square);
-                if (moves.length > 0) {
-                    setSelectedSquare(square);
-                    setLegalMoves(moves);
+                // Check for game over
+                if (gameCopy.isGameOver() && onGameEnd) {
+                    let result = 'Game Over';
+                    if (gameCopy.isCheckmate()) {
+                        result = `Checkmate! ${gameCopy.turn() === 'w' ? 'Black' : 'White'} wins!`;
+                    } else if (gameCopy.isDraw()) {
+                        result = 'Draw!';
+                    } else if (gameCopy.isStalemate()) {
+                        result = 'Stalemate!';
+                    }
 
-                    const squares = {};
-                    moves.forEach(move => {
-                        squares[move] = {
-                            background: 'radial-gradient(circle, rgba(139, 92, 246, 0.5) 25%, transparent 25%)',
-                            borderRadius: '50%'
-                        };
+                    onGameEnd({
+                        pgn: gameCopy.pgn(),
+                        fen: gameCopy.fen(),
+                        result: result,
+                        history: gameCopy.history({ verbose: true })
                     });
-                    setOptionSquares(squares);
-                } else {
-                    setSelectedSquare(null);
-                    setLegalMoves([]);
-                    setOptionSquares({});
                 }
+                return;
             }
+        }
+
+        // No piece selected yet or invalid move - try to select a new piece
+        const hasMoveOptions = getMoveOptions(square);
+        if (hasMoveOptions) {
+            setMoveFrom(square);
+        } else {
+            setMoveFrom(null);
         }
     }
 
-    /**
-     * Handle right-click for drawing arrows (future feature)
-     */
-    function onSquareRightClick(square) {
-        // Future: Drawing arrows and circles
-        console.log('Right click on:', square);
+    // Undo move
+    function undoMove() {
+        safeGameMutate((game) => {
+            game.undo();
+        });
+        setMoveHistory(game.history({ verbose: true }));
+        setOptionSquares({});
+        setMoveFrom(null);
+    }
+
+    // Reset game
+    function resetGame() {
+        setGame(new Chess());
+        setMoveHistory([]);
+        setOptionSquares({});
+        setMoveFrom(null);
+    }
+
+    const isGameOver = game.isGameOver();
+    let gameResult = null;
+    if (isGameOver) {
+        if (game.isCheckmate()) {
+            gameResult = `Checkmate! ${game.turn() === 'w' ? 'Black' : 'White'} wins!`;
+        } else if (game.isDraw()) {
+            gameResult = 'Draw!';
+        } else if (game.isStalemate()) {
+            gameResult = 'Stalemate!';
+        }
     }
 
     return (
         <div className="chess-board-container">
             <div className="chess-board-wrapper">
                 <Chessboard
-                    position={position}
+                    id="PlayableChessboard"
+                    position={game.fen()}
                     onPieceDrop={onDrop}
                     onSquareClick={onSquareClick}
-                    onSquareRightClick={onSquareRightClick}
                     boardOrientation={boardOrientation}
                     customBoardStyle={{
                         borderRadius: '8px',
                         boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
                         ...customStyles
                     }}
-                    customSquareStyles={{
-                        ...optionSquares,
-                        ...(selectedSquare && {
-                            [selectedSquare]: {
-                                background: 'rgba(255, 255, 0, 0.4)'
-                            }
-                        })
-                    }}
+                    customSquareStyles={optionSquares}
                     arePiecesDraggable={interactive}
                     showBoardNotation={showNotation}
+                    animationDuration={200}
                 />
             </div>
 
@@ -176,9 +219,9 @@ export default function ChessBoard({
                     ⟲ Reset
                 </button>
 
-                {isGameOver && result && (
+                {isGameOver && gameResult && (
                     <div className="game-result">
-                        <div className="result-badge">{result}</div>
+                        <div className="result-badge">{gameResult}</div>
                     </div>
                 )}
             </div>

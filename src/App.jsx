@@ -11,6 +11,7 @@ import TournamentCalendar from './components/TournamentCalendar';
 import FAQ from './components/FAQ';
 import DemoBooking from './components/DemoBooking';
 import ChessFeatures from './components/ChessFeatures';
+import CoachProfiles from './components/CoachProfiles';
 import Footer from './components/Footer';
 import AdminView from './components/AdminView';
 import './App.css';
@@ -51,6 +52,7 @@ function App() {
       <CoursesPreview />
       <StudentAchievements />
       <Testimonials />
+      <CoachProfiles />
       <TournamentCalendar />
       <FAQ />
       <DemoBooking />
