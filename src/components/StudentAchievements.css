@@ -1,0 +1,310 @@
+/* ============================================
+   Student Achievements Section Styles
+   ============================================ */
+
+.achievements-section {
+    background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+}
+
+.section-header {
+    margin-bottom: var(--spacing-4xl);
+}
+
+.section-subtitle {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-accent-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.section-title {
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--spacing-lg);
+}
+
+.section-description {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+}
+
+/* Achievement Grid */
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-4xl);
+}
+
+.achievement-card {
+    position: relative;
+    padding: var(--spacing-xl);
+    cursor: pointer;
+    overflow: hidden;
+    animation: fadeIn 0.8s ease-out backwards;
+}
+
+.achievement-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--color-accent-gradient);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition-base);
+}
+
+.achievement-card:hover::before {
+    transform: scaleX(1);
+}
+
+.achievement-card:hover {
+    transform: translateY(-8px);
+}
+
+/* Achievement Icon */
+.achievement-icon {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(59, 130, 246, 0.2));
+    border-radius: var(--radius-full);
+    margin-bottom: var(--spacing-lg);
+    transition: all var(--transition-base);
+}
+
+.achievement-card:hover .achievement-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Achievement Info */
+.achievement-info {
+    position: relative;
+    z-index: 2;
+}
+
+.achievement-name {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text-primary);
+}
+
+.achievement-age {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-tertiary);
+    margin-bottom: var(--spacing-md);
+}
+
+.achievement-title {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    color: var(--color-accent-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.achievement-title svg {
+    color: #f59e0b;
+}
+
+.achievement-tournament {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.4;
+}
+
+.achievement-rating {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--glass-border);
+}
+
+.rating-label {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-tertiary);
+}
+
+.rating-value {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    background: var(--color-accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Achievement Hover */
+.achievement-hover {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--spacing-xl);
+    background: linear-gradient(to top, rgba(10, 10, 15, 0.98), transparent);
+    transform: translateY(100%);
+    transition: transform var(--transition-base);
+}
+
+.achievement-card:hover .achievement-hover {
+    transform: translateY(0);
+}
+
+.achievement-hover p {
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-secondary);
+}
+
+.btn-link {
+    background: none;
+    border: none;
+    color: var(--color-accent-primary);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.btn-link:hover {
+    color: var(--color-accent-secondary);
+    transform: translateX(4px);
+}
+
+/* Achievements CTA */
+.achievements-cta {
+    text-align: center;
+    padding: var(--spacing-3xl);
+    background: rgba(139, 92, 246, 0.05);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: var(--radius-xl);
+}
+
+.achievements-cta p {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-text-primary);
+}
+
+/* Modal */
+.achievement-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-modal);
+    padding: var(--spacing-xl);
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    animation: slideInRight 0.3s ease-out;
+}
+
+.modal-close {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-text-primary);
+    font-size: var(--font-size-2xl);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.modal-close:hover {
+    background: rgba(239, 68, 68, 0.2);
+    transform: rotate(90deg);
+}
+
+.modal-icon {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(59, 130, 246, 0.3));
+    border-radius: var(--radius-full);
+}
+
+.modal-age {
+    color: var(--color-text-tertiary);
+    margin-bottom: var(--spacing-lg);
+}
+
+.modal-achievement {
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.modal-achievement h3 {
+    color: var(--color-accent-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.modal-details {
+    margin-bottom: var(--spacing-xl);
+}
+
+.modal-rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-md);
+}
+
+.rating-badge {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    background: var(--color-accent-gradient);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .achievements-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .achievement-hover {
+        position: static;
+        transform: none;
+        background: none;
+        padding: var(--spacing-md) 0 0;
+        margin-top: var(--spacing-md);
+        border-top: 1px solid var(--glass-border);
+    }
+}

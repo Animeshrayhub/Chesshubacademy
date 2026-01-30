@@ -1,0 +1,88 @@
+/* ============================================
+   Opening Display Styles
+   ============================================ */
+
+.opening-display {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+    border: 2px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin-top: var(--spacing-md);
+}
+
+.opening-placeholder {
+    text-align: center;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    padding: var(--spacing-md);
+}
+
+.opening-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-sm);
+}
+
+.opening-icon {
+    font-size: 20px;
+}
+
+.opening-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.opening-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.opening-details {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
+.opening-eco {
+    padding: 4px 12px;
+    background: rgba(245, 158, 11, 0.2);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    border-radius: var(--radius-md);
+    font-size: 12px;
+    font-weight: 600;
+    color: #f59e0b;
+}
+
+.opening-category {
+    padding: 4px 12px;
+    background: rgba(139, 92, 246, 0.2);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--radius-md);
+    font-size: 12px;
+    font-weight: 600;
+    color: #8b5cf6;
+}
+
+.opening-moves {
+    display: flex;
+    gap: var(--spacing-xs);
+    align-items: baseline;
+}
+
+.moves-label {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.moves-sequence {
+    font-size: 14px;
+    font-family: 'Courier New', monospace;
+    color: var(--color-text-primary);
+    font-weight: 600;
+}

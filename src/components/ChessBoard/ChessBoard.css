@@ -1,0 +1,220 @@
+/* ============================================
+   Chess Board Styles
+   ============================================ */
+
+.chess-board-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: var(--spacing-xl);
+}
+
+.chess-board-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: var(--spacing-xl);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Touch Optimizations for Mobile */
+@media (hover: none) and (pointer: coarse) {
+    .chess-board-wrapper {
+        touch-action: none;
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+    }
+}
+
+/* Controls */
+.chess-controls {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    margin-bottom: var(--spacing-lg);
+    flex-wrap: wrap;
+}
+
+.chess-btn {
+    padding: 12px 24px;
+    background: rgba(139, 92, 246, 0.1);
+    border: 2px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--radius-lg);
+    color: var(--color-text-primary);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.chess-btn:hover:not(:disabled) {
+    background: rgba(139, 92, 246, 0.2);
+    border-color: rgba(139, 92, 246, 0.5);
+    transform: translateY(-2px);
+}
+
+.chess-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.chess-btn-undo {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+.chess-btn-undo:hover:not(:disabled) {
+    background: rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.5);
+}
+
+.chess-btn-reset {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+.chess-btn-reset:hover:not(:disabled) {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.5);
+}
+
+/* Game Result */
+.game-result {
+    width: 100%;
+    text-align: center;
+    animation: slideInDown 0.5s ease-out;
+}
+
+.result-badge {
+    display: inline-block;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    border-radius: var(--radius-full);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Move History */
+.move-history {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.move-history h4 {
+    font-size: 18px;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-primary);
+}
+
+.moves-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+}
+
+.move-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.move-number {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.move-notation {
+    background: rgba(139, 92, 246, 0.1);
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: var(--color-text-primary);
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+}
+
+/* Custom Scrollbar */
+.move-history::-webkit-scrollbar {
+    width: 8px;
+}
+
+.move-history::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.move-history::-webkit-scrollbar-thumb {
+    background: rgba(139, 92, 246, 0.5);
+    border-radius: 4px;
+}
+
+.move-history::-webkit-scrollbar-thumb:hover {
+    background: rgba(139, 92, 246, 0.7);
+}
+
+/* Animations */
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .chess-board-container {
+        padding: var(--spacing-md);
+    }
+
+    .chess-controls {
+        gap: var(--spacing-sm);
+    }
+
+    .chess-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+        flex: 1;
+        min-width: 120px;
+    }
+
+    .result-badge {
+        font-size: 18px;
+        padding: 12px 24px;
+    }
+
+    .move-history {
+        max-height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .chess-btn {
+        width: 100%;
+        min-width: auto;
+    }
+
+    .moves-list {
+        font-size: 13px;
+    }
+}
+
+/* Haptic Feedback (Vibration on move) */
+@supports (vibrate: 1) {
+    .chess-board-wrapper {
+        --vibrate-on-move: true;
+    }
+}

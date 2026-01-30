@@ -1,0 +1,122 @@
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--color-bg-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: fadeOut 0.5s ease-out 0s forwards;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+.loading-content {
+    text-align: center;
+    max-width: 500px;
+    padding: var(--spacing-xl);
+}
+
+.chess-pieces-animation {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-2xl);
+    height: 80px;
+}
+
+.chess-piece {
+    font-size: 4rem;
+    animation: bounce 1s ease-in-out infinite;
+}
+
+.chess-piece.king {
+    animation-delay: 0s;
+    color: #8b5cf6;
+}
+
+.chess-piece.queen {
+    animation-delay: 0.1s;
+    color: #3b82f6;
+}
+
+.chess-piece.rook {
+    animation-delay: 0.2s;
+    color: #ec4899;
+}
+
+.chess-piece.bishop {
+    animation-delay: 0.3s;
+    color: #06b6d4;
+}
+
+.chess-piece.knight {
+    animation-delay: 0.4s;
+    color: #8b5cf6;
+}
+
+.chess-piece.pawn {
+    animation-delay: 0.5s;
+    color: #3b82f6;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.loading-title {
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--spacing-md);
+    background: var(--color-accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.loading-subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.loading-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin-bottom: var(--spacing-md);
+}
+
+.loading-progress {
+    height: 100%;
+    background: var(--color-accent-gradient);
+    transition: width 0.3s ease;
+    border-radius: var(--radius-full);
+}
+
+.loading-percentage {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-tertiary);
+    font-weight: 600;
+}

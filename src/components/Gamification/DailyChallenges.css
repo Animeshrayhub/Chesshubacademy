@@ -1,0 +1,309 @@
+/* ============================================
+   Daily Challenges Styles
+   ============================================ */
+
+.daily-challenges {
+    padding: var(--spacing-2xl);
+}
+
+.challenges-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-2xl);
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+}
+
+.challenges-header h2 {
+    font-size: 32px;
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.streak-display {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 12px 24px;
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(249, 115, 22, 0.1));
+    border: 2px solid rgba(239, 68, 68, 0.3);
+    border-radius: var(--radius-full);
+}
+
+.streak-icon {
+    font-size: 28px;
+}
+
+.streak-number {
+    font-size: 28px;
+    font-weight: 800;
+    color: #ef4444;
+}
+
+.streak-label {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Overall Progress */
+.overall-progress {
+    margin-bottom: var(--spacing-2xl);
+}
+
+.progress-text {
+    font-size: 16px;
+    margin-bottom: var(--spacing-sm);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.progress-bar {
+    height: 24px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #f59e0b, #fbbf24);
+    border-radius: var(--radius-full);
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Challenges Grid */
+.challenges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.challenge-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-xl);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.challenge-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.challenge-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(139, 92, 246, 0.4);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.2);
+}
+
+.challenge-card:hover::before {
+    opacity: 1;
+}
+
+.challenge-card.completed {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.1));
+    border-color: rgba(34, 197, 94, 0.3);
+}
+
+.challenge-card.completed::before {
+    background: linear-gradient(90deg, #22c55e, #10b981);
+    opacity: 1;
+}
+
+.challenge-icon {
+    font-size: 48px;
+    margin-bottom: var(--spacing-md);
+}
+
+.challenge-content h3 {
+    font-size: 20px;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text-primary);
+}
+
+.challenge-content p {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Challenge Progress */
+.challenge-progress {
+    margin-bottom: var(--spacing-lg);
+}
+
+.progress-bar-small {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin-bottom: var(--spacing-xs);
+}
+
+.progress-fill-small {
+    height: 100%;
+    background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+    border-radius: var(--radius-full);
+    transition: width 0.4s ease-out;
+}
+
+.challenge-card.completed .progress-fill-small {
+    background: linear-gradient(90deg, #22c55e, #10b981);
+}
+
+.progress-numbers {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Challenge Footer */
+.challenge-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.xp-reward {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.xp-icon {
+    font-size: 20px;
+}
+
+.xp-amount {
+    font-size: 16px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.btn-complete {
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+    border: none;
+    border-radius: var(--radius-lg);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-complete:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+}
+
+.completed-badge {
+    padding: 8px 16px;
+    background: rgba(34, 197, 94, 0.2);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    border-radius: var(--radius-lg);
+    color: #22c55e;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* All Complete Banner */
+.all-complete-banner {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+    border: 2px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.banner-content {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.banner-icon {
+    font-size: 64px;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.banner-text h3 {
+    font-size: 24px;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text-primary);
+}
+
+.banner-text p {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .daily-challenges {
+        padding: var(--spacing-lg);
+    }
+
+    .challenges-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .challenges-header h2 {
+        font-size: 24px;
+    }
+
+    .challenges-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .banner-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .banner-icon {
+        font-size: 48px;
+    }
+}

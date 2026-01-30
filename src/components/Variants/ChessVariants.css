@@ -1,0 +1,187 @@
+/* ============================================
+   Chess Variants Styles
+   ============================================ */
+
+.chess-variants {
+    padding: var(--spacing-2xl);
+}
+
+.variants-header {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.variants-header h2 {
+    font-size: 32px;
+    margin-bottom: var(--spacing-md);
+}
+
+.variants-header p {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.variants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.variant-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-xl);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.variant-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(139, 92, 246, 0.4);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.2);
+}
+
+.variant-card.selected {
+    border-color: rgba(139, 92, 246, 0.6);
+    background: rgba(139, 92, 246, 0.1);
+}
+
+.variant-icon {
+    font-size: 48px;
+    margin-bottom: var(--spacing-md);
+}
+
+.variant-card h3 {
+    font-size: 20px;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-text-primary);
+}
+
+.variant-description {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: var(--spacing-md);
+    min-height: 40px;
+}
+
+.variant-difficulty {
+    margin-bottom: var(--spacing-md);
+}
+
+.difficulty-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.difficulty-badge.beginner {
+    background: rgba(34, 197, 94, 0.2);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #22c55e;
+}
+
+.difficulty-badge.intermediate {
+    background: rgba(245, 158, 11, 0.2);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    color: #f59e0b;
+}
+
+.difficulty-badge.advanced {
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+}
+
+.btn-play-variant {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+    border: none;
+    border-radius: var(--radius-lg);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-play-variant:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+}
+
+/* Variant Details */
+.variant-details {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+    border: 2px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    animation: fadeIn 0.3s;
+}
+
+.details-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.details-icon {
+    font-size: 40px;
+}
+
+.details-header h3 {
+    font-size: 24px;
+}
+
+.details-content h4 {
+    font-size: 16px;
+    margin-bottom: var(--spacing-sm);
+    color: #8b5cf6;
+}
+
+.details-content p {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: var(--spacing-md);
+}
+
+.coming-soon-badge {
+    padding: var(--spacing-md);
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    border-radius: var(--radius-lg);
+    font-size: 14px;
+    color: #f59e0b;
+    text-align: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .chess-variants {
+        padding: var(--spacing-lg);
+    }
+
+    .variants-grid {
+        grid-template-columns: 1fr;
+    }
+}

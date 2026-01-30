@@ -1,0 +1,195 @@
+/* ============================================
+   Anti-Computer Training Styles
+   ============================================ */
+
+.anti-computer-training {
+    padding: var(--spacing-2xl);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.training-header {
+    text-align: center;
+    margin-bottom: var(--spacing-3xl);
+}
+
+.training-header h2 {
+    font-size: 32px;
+    margin-bottom: var(--spacing-md);
+}
+
+.training-header p {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Mode Selection */
+.modes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-3xl);
+}
+
+.mode-card {
+    padding: var(--spacing-2xl);
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-xl);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.mode-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(139, 92, 246, 0.4);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.2);
+}
+
+.mode-icon {
+    font-size: 64px;
+    margin-bottom: var(--spacing-md);
+}
+
+.mode-card h3 {
+    font-size: 20px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.mode-card p {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: var(--spacing-md);
+}
+
+.btn-start-mode {
+    margin-top: var(--spacing-md);
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+    border: none;
+    border-radius: var(--radius-lg);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-start-mode:hover {
+    transform: scale(1.05);
+}
+
+.training-benefits {
+    padding: var(--spacing-2xl);
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+    border: 2px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--radius-xl);
+}
+
+.training-benefits h3 {
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+}
+
+.training-benefits ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+}
+
+.training-benefits li {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Training Session */
+.training-session {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.session-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-lg);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-lg);
+}
+
+.btn-back {
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-md);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-back:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.session-score {
+    font-weight: 600;
+    color: #fbbf24;
+}
+
+.position-objective {
+    padding: var(--spacing-lg);
+    background: rgba(59, 130, 246, 0.1);
+    border-left: 4px solid #3b82f6;
+    border-radius: 8px;
+    margin-bottom: var(--spacing-xl);
+    font-size: 16px;
+}
+
+.position-hint {
+    padding: var(--spacing-lg);
+    background: rgba(245, 158, 11, 0.1);
+    border-left: 4px solid #f59e0b;
+    border-radius: 8px;
+    margin-top: var(--spacing-xl);
+    font-size: 14px;
+}
+
+.btn-check-move {
+    width: 100%;
+    margin-top: var(--spacing-xl);
+    padding: 16px;
+    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+    border: none;
+    border-radius: var(--radius-lg);
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-check-move:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .modes-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .training-benefits ul {
+        grid-template-columns: 1fr;
+    }
+
+    .session-header {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        text-align: center;
+    }
+}

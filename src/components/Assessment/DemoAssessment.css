@@ -1,0 +1,290 @@
+/* ============================================
+   Demo Assessment Styles
+   ============================================ */
+
+.demo-assessment {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: var(--spacing-2xl);
+}
+
+/* Form */
+.assessment-form {
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-2xl);
+    padding: var(--spacing-3xl);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.form-header h2 {
+    font-size: 32px;
+    margin-bottom: var(--spacing-md);
+}
+
+.form-header p {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    color: white;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #8b5cf6;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.btn-start-assessment {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+    border: none;
+    border-radius: var(--radius-lg);
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: var(--spacing-lg);
+}
+
+.btn-start-assessment:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);
+}
+
+/* Game */
+.assessment-game {
+    text-align: center;
+}
+
+.game-instructions {
+    margin-bottom: var(--spacing-2xl);
+    padding: var(--spacing-xl);
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+    border: 2px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--radius-xl);
+}
+
+.game-instructions h3 {
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Analyzing */
+.assessment-analyzing {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+}
+
+.analyzing-animation {
+    text-align: center;
+}
+
+.spinner-large {
+    width: 80px;
+    height: 80px;
+    border: 6px solid rgba(139, 92, 246, 0.2);
+    border-top-color: #8b5cf6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto var(--spacing-xl);
+}
+
+/* Results */
+.assessment-results {
+    animation: fadeIn 0.6s;
+}
+
+.results-header {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.results-header h2 {
+    font-size: 32px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.result-card {
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-xl);
+    text-align: center;
+}
+
+.result-card.overall {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.1));
+    border: 2px solid rgba(34, 197, 94, 0.3);
+}
+
+.result-card.tactical {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(251, 191, 36, 0.1));
+    border: 2px solid rgba(245, 158, 11, 0.3);
+}
+
+.result-card.positional {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+    border: 2px solid rgba(139, 92, 246, 0.3);
+}
+
+.result-card h3 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--spacing-md);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.big-number {
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: var(--spacing-sm);
+}
+
+.result-card p {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.recommendation-box {
+    padding: var(--spacing-2xl);
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+    border: 3px solid rgba(139, 92, 246, 0.4);
+    border-radius: var(--radius-xl);
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.recommendation-box h3 {
+    margin-bottom: var(--spacing-md);
+}
+
+.course-recommendation {
+    font-size: 28px;
+    font-weight: 800;
+    color: #8b5cf6;
+    margin-bottom: var(--spacing-sm);
+}
+
+.analysis-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.analysis-details>div {
+    padding: var(--spacing-lg);
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+}
+
+.analysis-details h4 {
+    margin-bottom: var(--spacing-md);
+    font-size: 16px;
+}
+
+.analysis-details ul {
+    list-style: none;
+    padding: 0;
+}
+
+.analysis-details li {
+    padding: var(--spacing-xs) 0;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.next-steps {
+    text-align: center;
+    padding: var(--spacing-2xl);
+    background: rgba(34, 197, 94, 0.1);
+    border: 2px solid rgba(34, 197, 94, 0.3);
+    border-radius: var(--radius-xl);
+}
+
+.next-steps h3 {
+    margin-bottom: var(--spacing-md);
+}
+
+.next-steps p {
+    margin-bottom: var(--spacing-lg);
+    font-size: 16px;
+}
+
+.btn-finish {
+    padding: 12px 32px;
+    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+    border: none;
+    border-radius: var(--radius-lg);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-finish:hover {
+    transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    .results-grid,
+    .analysis-details {
+        grid-template-columns: 1fr;
+    }
+
+    .big-number {
+        font-size: 36px;
+    }
+}

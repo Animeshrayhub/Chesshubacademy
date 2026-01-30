@@ -1,0 +1,177 @@
+import { createClient } from '@supabase/supabase-js';
+
+// Supabase configuration
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://bxrkkremfbfprscuumeq.supabase.co';
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+
+// Create Supabase client
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+// Database helper functions
+
+/**
+ * Save demo assessment to database
+ */
+export async function saveDemoAssessment(data) {
+    try {
+        const { data: result, error } = await supabase
+            .from('demo_assessments')
+            .insert([{
+                name: data.name,
+                email: data.email,
+                phone: data.phone,
+                age: data.age,
+                experience: data.experience,
+                game_pgn: data.gameData?.pgn || '',
+                game_moves: data.gameData?.history || [],
+                accuracy: data.assessment?.accuracy || 0,
+                tactical_rating: data.assessment?.tacticalRating || 0,
+                positional_rating: data.assessment?.positionalRating || 0,
+                recommended_course: data.assessment?.recommendedCourse || '',
+                strengths: data.assessment?.strengths || [],
+                weaknesses: data.assessment?.weaknesses || [],
+                suggested_focus: data.assessment?.suggestedFocus || [],
+                created_at: new Date().toISOString()
+            }])
+            .select();
+
+        if (error) {
+            console.error('Supabase error:', error);
+            return { success: false, error };
+        }
+
+        return { success: true, data: result };
+    } catch (error) {
+        console.error('Error saving demo assessment:', error);
+        return { success: false, error };
+    }
+}
+
+/**
+ * Get leaderboard data
+ */
+export async function getLeaderboard(period = 'all') {
+    try {
+        let query = supabase
+            .from('leaderboard')
+            .select('*')
+            .order('score', { ascending: false })
+            .limit(10);
+
+        // Filter by period if needed
+        if (period !== 'all') {
+            const now = new Date();
+            let startDate;
+
+            switch (period) {
+                case 'daily':
+                    startDate = new Date(now.setHours(0, 0, 0, 0));
+                    break;
+                case 'weekly':
+                    startDate = new Date(now.setDate(now.getDate() - 7));
+                    break;
+                case 'monthly':
+                    startDate = new Date(now.setMonth(now.getMonth() - 1));
+                    break;
+            }
+
+            if (startDate) {
+                query = query.gte('created_at', startDate.toISOString());
+            }
+        }
+
+        const { data, error } = await query;
+
+        if (error) {
+            console.error('Supabase error:', error);
+            return { success: false, error };
+        }
+
+        return { success: true, data };
+    } catch (error) {
+        console.error('Error fetching leaderboard:', error);
+        return { success: false, error };
+    }
+}
+
+/**
+ * Update user stats
+ */
+export async function updateUserStats(userId, stats) {
+    try {
+        const { data, error } = await supabase
+            .from('user_stats')
+            .upsert([{
+                user_id: userId,
+                xp: stats.xp,
+                level: stats.level,
+                total_puzzles: stats.totalPuzzles,
+                current_streak: stats.currentStreak,
+                best_streak: stats.bestStreak,
+                updated_at: new Date().toISOString()
+            }])
+            .select();
+
+        if (error) {
+            console.error('Supabase error:', error);
+            return { success: false, error };
+        }
+
+        return { success: true, data };
+    } catch (error) {
+        console.error('Error updating user stats:', error);
+        return { success: false, error };
+    }
+}
+
+/**
+ * Get user stats
+ */
+export async function getUserStats(userId) {
+    try {
+        const { data, error } = await supabase
+            .from('user_stats')
+            .select('*')
+            .eq('user_id', userId)
+            .single();
+
+        if (error && error.code !== 'PGRST116') { // Not found is ok
+            console.error('Supabase error:', error);
+            return { success: false, error };
+        }
+
+        return { success: true, data: data || null };
+    } catch (error) {
+        console.error('Error fetching user stats:', error);
+        return { success: false, error };
+    }
+}
+
+/**
+ * Update leaderboard entry
+ */
+export async function updateLeaderboardEntry(username, score, streak) {
+    try {
+        const { data, error } = await supabase
+            .from('leaderboard')
+            .upsert([{
+                username,
+                score,
+                streak,
+                updated_at: new Date().toISOString()
+            }])
+            .select();
+
+        if (error) {
+            console.error('Supabase error:', error);
+            return { success: false, error };
+        }
+
+        return { success: true, data };
+    } catch (error) {
+        console.error('Error updating leaderboard:', error);
+        return { success: false, error };
+    }
+}
+
+export default supabase;

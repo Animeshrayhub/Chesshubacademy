@@ -1,0 +1,111 @@
+.testimonials-section {
+    background: var(--color-bg-secondary);
+    position: relative;
+    z-index: var(--z-base);
+}
+
+.testimonials-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.testimonial-card {
+    padding: var(--spacing-3xl);
+    text-align: center;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.testimonial-content {
+    animation: fadeIn 0.5s ease-in;
+}
+
+.testimonial-avatar {
+    font-size: 5rem;
+    margin-bottom: var(--spacing-lg);
+}
+
+.testimonial-rating {
+    margin-bottom: var(--spacing-lg);
+}
+
+.star {
+    font-size: var(--font-size-xl);
+    margin: 0 var(--spacing-xs);
+}
+
+.testimonial-text {
+    font-size: var(--font-size-xl);
+    line-height: 1.8;
+    color: var(--color-text-primary);
+    font-style: italic;
+    margin-bottom: var(--spacing-xl);
+}
+
+.testimonial-author {
+    margin-top: var(--spacing-xl);
+}
+
+.author-name {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.author-location {
+    font-size: var(--font-size-sm);
+    color: var(--color-accent-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.author-role {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-tertiary);
+}
+
+.testimonial-dots {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    margin-top: var(--spacing-2xl);
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--glass-border);
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    padding: 0;
+}
+
+.dot:hover {
+    background: var(--color-accent-secondary);
+    transform: scale(1.2);
+}
+
+.dot.active {
+    background: var(--color-accent-primary);
+    width: 32px;
+    border-radius: var(--radius-full);
+}
+
+@media (max-width: 768px) {
+    .testimonial-card {
+        padding: var(--spacing-xl);
+        min-height: 350px;
+    }
+
+    .testimonial-text {
+        font-size: var(--font-size-lg);
+    }
+
+    .testimonial-avatar {
+        font-size: 4rem;
+    }
+}

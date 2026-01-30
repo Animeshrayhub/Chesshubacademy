@@ -1,0 +1,238 @@
+/* ============================================
+   Puzzle Streak Tracker Styles
+   ============================================ */
+
+.streak-tracker {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(59, 130, 246, 0.05));
+    border: 2px solid rgba(139, 92, 246, 0.2);
+    border-radius: var(--radius-2xl);
+    padding: var(--spacing-2xl);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.streak-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.streak-header h3 {
+    font-size: 24px;
+    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.streak-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(139, 92, 246, 0.4);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.2);
+}
+
+.stat-icon {
+    font-size: 32px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.stat-value {
+    font-size: 36px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: var(--spacing-xs);
+}
+
+.stat-label {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-message {
+    font-size: 12px;
+    color: #8b5cf6;
+    font-weight: 600;
+    margin-top: var(--spacing-xs);
+}
+
+/* Streak-specific styling */
+.streak-current {
+    border: 2px solid rgba(239, 68, 68, 0.3);
+}
+
+.streak-current .stat-value {
+    background: linear-gradient(135deg, #ef4444, #f97316);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.streak-best {
+    border: 2px solid rgba(245, 158, 11, 0.3);
+}
+
+.streak-best .stat-value {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.streak-total {
+    border: 2px solid rgba(34, 197, 94, 0.3);
+}
+
+.streak-total .stat-value {
+    background: linear-gradient(135deg, #22c55e, #10b981);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Milestone Badge */
+.streak-milestone {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    animation: slideInDown 0.6s ease-out;
+}
+
+.milestone-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+    border-radius: var(--radius-full);
+    color: white;
+    font-weight: 700;
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.badge-icon {
+    font-size: 20px;
+    animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Progress Bar */
+.streak-progress {
+    margin-top: var(--spacing-lg);
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-sm);
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.progress-target {
+    font-weight: 700;
+    color: #8b5cf6;
+}
+
+.progress-bar {
+    height: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+    border-radius: var(--radius-full);
+    transition: width 0.6s ease-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .streak-tracker {
+        padding: var(--spacing-lg);
+    }
+
+    .streak-stats {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+
+    .stat-icon {
+        font-size: 24px;
+    }
+
+    .stat-value {
+        font-size: 28px;
+    }
+
+    .milestone-badge {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}

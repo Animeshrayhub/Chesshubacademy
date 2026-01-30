@@ -1,0 +1,232 @@
+/* ============================================
+   Puzzle Leaderboard Styles
+   ============================================ */
+
+.puzzle-leaderboard {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-2xl);
+    padding: var(--spacing-2xl);
+}
+
+.leaderboard-header {
+    margin-bottom: var(--spacing-2xl);
+}
+
+.leaderboard-header h2 {
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.period-selector {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
+.period-btn {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.period-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(245, 158, 11, 0.5);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.period-btn.active {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    border-color: transparent;
+    color: white;
+}
+
+/* Table */
+.leaderboard-table {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.table-header {
+    display: grid;
+    grid-template-columns: 80px 1fr 120px 120px;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg);
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.table-body {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.table-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 120px 120px;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s;
+    align-items: center;
+}
+
+.table-row:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.table-row.top-1 {
+    background: linear-gradient(90deg, rgba(255, 215, 0, 0.1), transparent);
+}
+
+.table-row.top-2 {
+    background: linear-gradient(90deg, rgba(192, 192, 192, 0.1), transparent);
+}
+
+.table-row.top-3 {
+    background: linear-gradient(90deg, rgba(205, 127, 50, 0.1), transparent);
+}
+
+.col-rank {
+    text-align: center;
+}
+
+.rank-medal {
+    font-size: 32px;
+}
+
+.rank-number {
+    font-size: 20px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.col-player {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.player-avatar {
+    font-size: 24px;
+}
+
+.player-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.col-score {
+    font-size: 18px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.streak-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: var(--radius-full);
+    font-size: 14px;
+    font-weight: 600;
+    color: #ef4444;
+}
+
+/* User Rank Card */
+.user-rank-card {
+    margin-top: var(--spacing-xl);
+    padding: var(--spacing-lg);
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+    border: 2px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--radius-lg);
+}
+
+.rank-label {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #8b5cf6;
+    margin-bottom: var(--spacing-sm);
+    text-align: center;
+}
+
+.user-row {
+    background: rgba(139, 92, 246, 0.05);
+    border: none;
+}
+
+/* Scrollbar */
+.table-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.table-body::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.table-body::-webkit-scrollbar-thumb {
+    background: rgba(245, 158, 11, 0.5);
+    border-radius: 4px;
+}
+
+.table-body::-webkit-scrollbar-thumb:hover {
+    background: rgba(245, 158, 11, 0.7);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    .table-header,
+    .table-row {
+        grid-template-columns: 60px 1fr 80px;
+        gap: var(--spacing-sm);
+    }
+
+    .col-streak {
+        display: none;
+    }
+
+    .rank-medal {
+        font-size: 24px;
+    }
+
+    .player-avatar {
+        font-size: 20px;
+    }
+
+    .player-name {
+        font-size: 14px;
+    }
+
+    .col-score {
+        font-size: 16px;
+    }
+}

@@ -1,0 +1,62 @@
+/* ============================================
+   Font Size Control Styles
+   ============================================ */
+
+.font-size-control {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+}
+
+.control-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.size-buttons {
+    display: flex;
+    gap: var(--spacing-xs);
+}
+
+.size-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.size-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(139, 92, 246, 0.5);
+    color: rgba(255, 255, 255, 0.9);
+    transform: scale(1.1);
+}
+
+.size-btn.active {
+    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .font-size-control {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
