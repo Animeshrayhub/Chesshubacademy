@@ -2,8 +2,11 @@ import { useState } from 'react';
 import { useGoogleDriveGallery } from '../hooks/useGoogleDriveGallery';
 import './GoogleDriveGallery.css';
 
-const FOLDER_ID = import.meta.env.VITE_GOOGLE_DRIVE_FOLDER_ID;
-const API_KEY = import.meta.env.VITE_GOOGLE_DRIVE_API_KEY;
+const DEFAULT_FOLDER_ID = '1AvSHNysv8fda_6b4M6FliRi0aU4aSNLg';
+const DEFAULT_API_KEY = 'AIzaSyB0EnImgLjGYMmU2AQpZbHQyjv8GCnFYKc';
+
+const FOLDER_ID = import.meta.env.VITE_GOOGLE_DRIVE_FOLDER_ID || DEFAULT_FOLDER_ID;
+const API_KEY = import.meta.env.VITE_GOOGLE_DRIVE_API_KEY || DEFAULT_API_KEY;
 const REFRESH_INTERVAL = Number(import.meta.env.VITE_GALLERY_REFRESH_INTERVAL) || 300_000;
 
 export default function GoogleDriveGallery() {
