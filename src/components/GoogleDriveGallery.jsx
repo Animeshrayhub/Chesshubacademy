@@ -7,7 +7,7 @@ const API_KEY = import.meta.env.VITE_GOOGLE_DRIVE_API_KEY;
 const REFRESH_INTERVAL = Number(import.meta.env.VITE_GALLERY_REFRESH_INTERVAL) || 300_000;
 
 export default function GoogleDriveGallery() {
-    const [lightboxImg, setLightboxImg] = useState(null);
+    const [lightboxMedia, setLightboxMedia] = useState(null);
     const { images, loading, error, refresh, lastUpdated } = useGoogleDriveGallery({
         folderId: FOLDER_ID,
         apiKey: API_KEY,
@@ -64,7 +64,7 @@ export default function GoogleDriveGallery() {
             )}
 
             {!loading && !error && images.length === 0 && (
-                <p className="gdrive-gallery__empty">No images found in the gallery folder.</p>
+                <p className="gdrive-gallery__empty">No images or videos found in the gallery folder.</p>
             )}
 
             {images.length > 0 && (
@@ -73,8 +73,8 @@ export default function GoogleDriveGallery() {
                         <button
                             key={img.id}
                             className="gdrive-gallery__item"
-                            onClick={() => setLightboxImg(img)}
-                            aria-label={`View ${img.name}`}
+                            onClick={() => setLightboxMedia(img)}
+                            aria-label={`${img.type === 'video' ? 'Play' : 'View'} ${img.name}`}
                         >
                             <img
                                 src={img.thumb}
@@ -88,7 +88,7 @@ export default function GoogleDriveGallery() {
                                 }}
                             />
                             <div className="gdrive-gallery__overlay">
-                                <span className="gdrive-gallery__zoom">🔍</span>
+                                <span className="gdrive-gallery__zoom">{img.type === 'video' ? '▶' : '🔍'}</span>
                             </div>
                         </button>
                     ))}
@@ -96,33 +96,44 @@ export default function GoogleDriveGallery() {
             )}
 
             {/* Lightbox */}
-            {lightboxImg && (
+            {lightboxMedia && (
                 <div
                     className="gdrive-lightbox"
-                    onClick={() => setLightboxImg(null)}
+                    onClick={() => setLightboxMedia(null)}
                     role="dialog"
                     aria-modal="true"
-                    aria-label="Image viewer"
+                    aria-label="Media viewer"
                 >
                     <button
                         className="gdrive-lightbox__close"
-                        onClick={() => setLightboxImg(null)}
+                        onClick={() => setLightboxMedia(null)}
                         aria-label="Close"
                     >
                         ✕
                     </button>
-                    <img
-                        src={lightboxImg.src}
-                        alt={lightboxImg.name}
-                        className="gdrive-lightbox__img"
-                        onClick={(e) => e.stopPropagation()}
-                        onError={(e) => {
-                            if (e.target.src !== lightboxImg.fallbackSrc) {
-                                e.target.src = lightboxImg.fallbackSrc;
-                            }
-                        }}
-                    />
-                    <p className="gdrive-lightbox__caption">{lightboxImg.name}</p>
+                    {lightboxMedia.type === 'video' ? (
+                        <iframe
+                            src={lightboxMedia.previewUrl}
+                            title={lightboxMedia.name}
+                            className="gdrive-lightbox__video"
+                            allow="autoplay; fullscreen"
+                            allowFullScreen
+                            onClick={(e) => e.stopPropagation()}
+                        />
+                    ) : (
+                        <img
+                            src={lightboxMedia.src}
+                            alt={lightboxMedia.name}
+                            className="gdrive-lightbox__img"
+                            onClick={(e) => e.stopPropagation()}
+                            onError={(e) => {
+                                if (e.target.src !== lightboxMedia.fallbackSrc) {
+                                    e.target.src = lightboxMedia.fallbackSrc;
+                                }
+                            }}
+                        />
+                    )}
+                    <p className="gdrive-lightbox__caption">{lightboxMedia.name}</p>
                 </div>
             )}
         </section>

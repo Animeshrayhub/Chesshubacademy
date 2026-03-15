@@ -10,11 +10,19 @@ export function getDriveImageUrl(fileId, size = 800) {
     return `https://lh3.googleusercontent.com/d/${fileId}=w${size}`;
 }
 
+export function getDriveThumbUrl(fileId, size = 400) {
+    return `https://drive.google.com/thumbnail?id=${fileId}&sz=w${size}`;
+}
+
 /**
  * Fallback direct link (works when the folder is shared with "Anyone with link").
  */
 export function getDriveFallbackUrl(fileId) {
     return `https://drive.google.com/uc?export=view&id=${fileId}`;
+}
+
+export function getDriveVideoPreviewUrl(fileId) {
+    return `https://drive.google.com/file/d/${fileId}/preview`;
 }
 
 /**
@@ -39,7 +47,7 @@ async function fetchDriveImages(folderId, apiKey) {
     }
 
     const query = encodeURIComponent(
-        `'${folderId}' in parents and mimeType contains 'image/' and trashed = false`
+        `'${folderId}' in parents and (mimeType contains 'image/' or mimeType contains 'video/') and trashed = false`
     );
     const fields = encodeURIComponent('files(id,name,mimeType,thumbnailLink,createdTime)');
     const orderBy = 'createdTime desc';
@@ -55,16 +63,20 @@ async function fetchDriveImages(folderId, apiKey) {
     }
 
     const json = await res.json();
-    return (json.files || []).map((f) => ({
-        id: f.id,
-        name: f.name,
-        mimeType: f.mimeType,
-        createdTime: f.createdTime,
-        // Use lh3 direct thumbnail URL (no sign-in required for public files)
-        src: getDriveImageUrl(f.id, 800),
-        thumb: getDriveImageUrl(f.id, 400),
-        fallbackSrc: getDriveFallbackUrl(f.id),
-    }));
+    return (json.files || []).map((f) => {
+        const isVideo = f.mimeType?.startsWith('video/');
+        return {
+            id: f.id,
+            name: f.name,
+            mimeType: f.mimeType,
+            createdTime: f.createdTime,
+            type: isVideo ? 'video' : 'image',
+            src: isVideo ? getDriveVideoPreviewUrl(f.id) : getDriveImageUrl(f.id, 1200),
+            thumb: isVideo ? getDriveThumbUrl(f.id, 400) : getDriveImageUrl(f.id, 400),
+            fallbackSrc: getDriveFallbackUrl(f.id),
+            previewUrl: getDriveVideoPreviewUrl(f.id),
+        };
+    });
 }
 
 /**
