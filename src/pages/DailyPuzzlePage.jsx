@@ -21,7 +21,7 @@ export default function DailyPuzzlePage() {
   useEffect(() => {
     document.title = 'Daily Chess Puzzles with Solutions | ChessHub Academy';
     setMeta('description', 'Solve daily chess puzzles with solutions and explanations. Improve your tactical skills with free chess puzzles from ChessHub Academy.');
-    setMeta('keywords', 'daily chess puzzle, chess puzzles for beginners, chess tactics training, chess puzzle with solution');
+    setMeta('keywords', 'daily chess puzzle, chess puzzles for beginners, chess tactics training, chess puzzle with solution, chess puzzles, chess puzzle, chess tactics, chess next move, chess analysis, chess online, online chess game, play chess online free, chess free online, free chess, chess against computer');
     return () => { document.title = 'ChessHub Academy'; };
   }, []);
 

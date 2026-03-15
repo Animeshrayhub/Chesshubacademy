@@ -28,7 +28,7 @@ export default function BlogPage() {
       }
     };
     setMeta('description', 'Read expert chess articles on openings, strategy, endgames, puzzles and improvement tips from ChessHub Academy coaches.');
-    setMeta('keywords', 'chess blog, chess tips, chess strategy, chess openings, chess puzzles, learn chess online');
+    setMeta('keywords', 'chess blog, chess tips, chess strategy, chess openings, chess puzzles, learn chess online, chess online, online chess, play chess online, chess game, chess analysis, how to play chess, chess rules, chess engine, chess endgames, chess opening theory');
     return () => { document.title = 'ChessHub Academy'; };
   }, []);
 

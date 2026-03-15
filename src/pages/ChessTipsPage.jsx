@@ -21,7 +21,7 @@ export default function ChessTipsPage() {
   useEffect(() => {
     document.title = 'Chess Tips & Improvement Strategies | ChessHub Academy';
     setMeta('description', 'Practical chess tips and strategies to improve your game. Learn from expert coaches with proven methods for beginners and intermediate players.');
-    setMeta('keywords', 'chess tips for beginners, chess improvement strategies, how to get better at chess, chess training tips, chess study plan');
+    setMeta('keywords', 'chess tips for beginners, chess improvement strategies, how to get better at chess, chess training tips, chess study plan, chess strategy, chess analysis, chess rules, how to play chess, chess next move, chess engine, chess openings, chess puzzles, chess endgames, chess play online free, online chess game');
     return () => { document.title = 'ChessHub Academy'; };
   }, []);
 

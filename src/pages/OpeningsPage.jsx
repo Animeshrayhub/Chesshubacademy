@@ -21,7 +21,7 @@ export default function OpeningsPage() {
   useEffect(() => {
     document.title = 'Chess Openings for Beginners — Complete Guide | ChessHub Academy';
     setMeta('description', 'Learn the best chess openings for beginners with step-by-step guides. Master the Italian Game, Sicilian Defense, Queen\'s Gambit and more.');
-    setMeta('keywords', 'chess openings for beginners, best chess openings, italian game, sicilian defense, chess opening guide');
+    setMeta('keywords', 'chess openings for beginners, best chess openings, italian game, sicilian defense, chess opening guide, chess openings, chess opening theory, chess online, online chess, play chess online, chess game online, chess strategy, chess analysis, next chess move, chess tips');
     return () => { document.title = 'ChessHub Academy'; };
   }, []);
 

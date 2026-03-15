@@ -21,7 +21,7 @@ export default function EndgamesPage() {
   useEffect(() => {
     document.title = 'Chess Endgame Basics & Tutorials | ChessHub Academy';
     setMeta('description', 'Learn chess endgame techniques with step-by-step tutorials. Master king and pawn endgames, rook endgames, and essential endgame principles.');
-    setMeta('keywords', 'chess endgames tutorial, chess endgame basics, king and pawn endgame, rook endgame techniques, how to win chess endgames');
+    setMeta('keywords', 'chess endgames tutorial, chess endgame basics, king and pawn endgame, rook endgame techniques, how to win chess endgames, chess endgames, chess strategy, chess analysis, chess next move, chess play, play chess online, chess games, free chess online, chess against computer, chess board');
     return () => { document.title = 'ChessHub Academy'; };
   }, []);
 
