@@ -115,21 +115,34 @@ export function AuthProvider({ children }) {
         if (!supabase) {
             return { error: { message: 'Supabase not configured. Please set up Supabase credentials.' } };
         }
-        const { data, error } = await supabase.auth.signInWithPassword({
-            email,
-            password,
-        });
+        try {
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email,
+                password,
+            });
 
-        if (error) return { data, error };
+            if (error) return { data, error };
 
-        const authUser = data?.user || null;
-        const dbUser = await fetchAppUser(authUser);
-        if (dbUser?.status && dbUser.status !== 'active') {
-            await supabase.auth.signOut();
-            return { data: null, error: { message: 'Your account is inactive. Please contact admin.' } };
+            const authUser = data?.user || null;
+            const dbUser = await fetchAppUser(authUser);
+            if (dbUser?.status && dbUser.status !== 'active') {
+                await supabase.auth.signOut();
+                return { data: null, error: { message: 'Your account is inactive. Please contact admin.' } };
+            }
+
+            return { data, error };
+        } catch (err) {
+            const msg = err?.message || 'Login failed';
+            const networkError = /failed to fetch|networkerror|network request failed/i.test(msg);
+            return {
+                data: null,
+                error: {
+                    message: networkError
+                        ? 'Network/Auth connection failed. Verify Supabase URL and Anon Key in deployment environment and try again.'
+                        : msg,
+                },
+            };
         }
-
-        return { data, error };
     };
 
     const logout = async () => {

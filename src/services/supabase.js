@@ -1,8 +1,17 @@
 import { createClient } from '@supabase/supabase-js';
 
 // Supabase configuration — env vars are required
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const rawSupabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const rawSupabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+const supabaseUrl = typeof rawSupabaseUrl === 'string' ? rawSupabaseUrl.trim() : rawSupabaseUrl;
+const supabaseAnonKey = typeof rawSupabaseAnonKey === 'string'
+    ? rawSupabaseAnonKey.replace(/\s+/g, '')
+    : rawSupabaseAnonKey;
+
+if (typeof rawSupabaseAnonKey === 'string' && /\s/.test(rawSupabaseAnonKey)) {
+    console.warn('[ChessHub] VITE_SUPABASE_ANON_KEY contains whitespace/newlines; sanitized automatically.');
+}
 
 if (!supabaseUrl || !supabaseAnonKey) {
     console.warn(
